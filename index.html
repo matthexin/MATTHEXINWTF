@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -16,7 +15,7 @@
   body {
     background: #0a0a0a;
     min-height: 100vh;
-    font-family: 'Press Start 2P', monospace;
+    font-family: 'Press Start 2P', 'Consolas', 'DejaVu Sans Mono', monospace;
     padding: 45px;
     display: flex;
     justify-content: center;
@@ -45,7 +44,7 @@
   }
 
   .logo-text {
-    font-size: 69px;
+    font-size: clamp(20px, 5.2vw, 69px);
     letter-spacing: 3px;
     color: var(--green);
     text-align: center;
@@ -54,7 +53,6 @@
     text-shadow: 5px 5px 0 #000;
     animation: shake 2s steps(1, end) infinite;
     white-space: nowrap;
-    image-rendering: pixelated;
   }
 
   @keyframes shake {
@@ -71,7 +69,7 @@
 
   .desc {
     width: 100%;
-    margin-top: 24px;
+    margin-top: 56px;
     border-left: 2px solid var(--green);
     padding: 18px 24px;
     background: #0d0d0d;
@@ -137,9 +135,188 @@
     text-transform: uppercase;
   }
 
+  .music {
+    width: 100%;
+    margin-top: 56px;
+    border: 1px solid #2a2a2a;
+    background: #0d0d0d;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .music::before {
+    content: "// lao music";
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    background: #0a0a0a;
+    padding: 0 8px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--green);
+    z-index: 2;
+  }
+
+  .track {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 22px;
+    align-items: center;
+    padding: 22px 26px;
+    border-bottom: 1px solid #2a2a2a;
+    position: relative;
+  }
+
+  .track:last-child { border-bottom: none; }
+
+  .track::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 22px;
+    bottom: 22px;
+    width: 3px;
+    background: transparent;
+    transition: none;
+  }
+
+  .track.playing::after { background: var(--green); }
+
+  .track-play {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    background: transparent;
+    color: var(--green);
+    border: 2px solid var(--green);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .track-play:hover {
+    background: var(--green);
+    box-shadow: 4px 4px 0 rgba(57, 255, 20, 0.3);
+    transform: translate(-2px, -2px);
+  }
+
+  .track.playing .track-play {
+    background: rgba(57, 255, 20, 0.1);
+  }
+
+  .ico-play {
+    width: 0;
+    height: 0;
+    border-left: 16px solid var(--green);
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin-left: 5px;
+    display: block;
+  }
+
+  .ico-pause {
+    display: none;
+    width: 16px;
+    height: 20px;
+    background: linear-gradient(
+      to right,
+      var(--green) 0 6px,
+      transparent 6px 10px,
+      var(--green) 10px 16px
+    );
+  }
+
+  .track.playing .ico-play { display: none; }
+  .track.playing .ico-pause { display: block; }
+
+  .track-play:hover .ico-play { border-left-color: #000; }
+  .track-play:hover .ico-pause {
+    background: linear-gradient(
+      to right,
+      #000 0 6px,
+      transparent 6px 10px,
+      #000 10px 16px
+    );
+  }
+
+  .track-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .track-name {
+    font-size: 13px;
+    color: #fff;
+    letter-spacing: 2px;
+    line-height: 1.4;
+  }
+
+  .track-name .hl { color: var(--green); }
+
+  .track-meta {
+    font-size: 8px;
+    color: #555;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .track-bar {
+    width: 100%;
+    height: 10px;
+    background: #060606;
+    border: 1px solid #2a2a2a;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .track-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    background: var(--green);
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.35);
+    transition: none;
+  }
+
+  .track-time {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: #555;
+  }
+
+  .track-time .cur { color: var(--green); }
+  .track-time .sep { margin: 0 6px; color: #333; }
+
+  .track-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+    max-width: 180px;
+  }
+
+  .track-tags span {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--green);
+    border: 1px solid rgba(57, 255, 20, 0.5);
+    padding: 5px 10px;
+    background: rgba(57, 255, 20, 0.04);
+    text-transform: uppercase;
+  }
+
   .game {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 56px;
     border: 1px solid #2a2a2a;
     background: #0d0d0d;
     position: relative;
@@ -341,6 +518,276 @@
     border-color: #888;
     box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.1);
   }
+
+  /* ============ DEVLOG ============ */
+
+  .devlogs {
+    width: 100%;
+    margin-top: 56px;
+    border: 1px solid #2a2a2a;
+    background: #0d0d0d;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .devlogs::before {
+    content: "// devlog";
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    background: #0a0a0a;
+    padding: 0 8px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--green);
+    z-index: 2;
+  }
+
+  .log {
+    padding: 22px 26px;
+    border-bottom: 1px solid #2a2a2a;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .log:last-child { border-bottom: none; }
+
+  .log::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 22px;
+    bottom: 22px;
+    width: 3px;
+    background: transparent;
+  }
+
+  .log:hover::after { background: var(--green); }
+
+  .log-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .log-date {
+    font-size: 9px;
+    color: #555;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .log-tag {
+    font-size: 8px;
+    color: var(--green);
+    border: 1px solid rgba(57, 255, 20, 0.5);
+    padding: 4px 8px;
+    background: rgba(57, 255, 20, 0.04);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .log-tag.muted {
+    color: #888;
+    border-color: #2a2a2a;
+    background: transparent;
+  }
+
+  .log-title {
+    font-size: 14px;
+    color: #fff;
+    letter-spacing: 2px;
+    line-height: 1.4;
+  }
+
+  .log-title .hl { color: var(--green); }
+
+  .log-text {
+    font-size: 11px;
+    color: #999;
+    line-height: 2;
+    letter-spacing: 0.5px;
+  }
+
+  .log-text .hl { color: var(--green); }
+
+  .log-link {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--green);
+    text-decoration: none;
+    text-transform: uppercase;
+    align-self: flex-start;
+    border-bottom: 1px dashed rgba(57, 255, 20, 0.4);
+    padding-bottom: 2px;
+  }
+
+  .log-link:hover {
+    background: var(--green);
+    color: #000;
+    border-bottom-color: transparent;
+  }
+
+  /* ============ SOCIALS ============ */
+
+  .socials {
+    width: 100%;
+    margin-top: 56px;
+    border: 1px solid #2a2a2a;
+    background: #0d0d0d;
+    position: relative;
+    padding: 34px 26px 26px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+  }
+
+  .socials::before {
+    content: "// links";
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    background: #0a0a0a;
+    padding: 0 8px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--green);
+    z-index: 2;
+  }
+
+  .social {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    aspect-ratio: 1 / 1;
+    padding: 18px 12px;
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    text-decoration: none;
+    color: #888;
+    font-family: inherit;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: none;
+  }
+
+  .social::before,
+  .social::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--green);
+    opacity: 0;
+    transition: none;
+  }
+  .social::before { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+  .social::after  { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+
+  .social:hover {
+    border-color: var(--green);
+    background: rgba(57, 255, 20, 0.05);
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 rgba(57, 255, 20, 0.25);
+  }
+
+  .social:hover::before,
+  .social:hover::after { opacity: 1; }
+
+   .social-ico {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--green);
+    background: rgba(57, 255, 20, 0.06);
+    flex-shrink: 0;
+  }
+
+  .social-ico::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background: var(--green);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  .social:hover .social-ico {
+    background: var(--green);
+  }
+
+  .social:hover .social-ico::before {
+    background: #000;
+  }
+
+  .social-ico[data-ico="youtube"]::before {
+    -webkit-mask-image: url("https://cdn.simpleicons.org/youtube");
+    mask-image: url("https://cdn.simpleicons.org/youtube");
+  }
+  .social-ico[data-ico="telegram"]::before {
+    -webkit-mask-image: url("https://cdn.simpleicons.org/telegram");
+    mask-image: url("https://cdn.simpleicons.org/telegram");
+  }
+  .social-ico[data-ico="discord"]::before {
+    -webkit-mask-image: url("https://cdn.simpleicons.org/discord");
+    mask-image: url("https://cdn.simpleicons.org/discord");
+  }
+  .social-ico[data-ico="itchio"]::before {
+    -webkit-mask-image: url("https://cdn.simpleicons.org/itchdotio");
+    mask-image: url("https://cdn.simpleicons.org/itchdotio");
+  }
+  .social-ico[data-ico="github"]::before {
+    -webkit-mask-image: url("https://cdn.simpleicons.org/github");
+    mask-image: url("https://cdn.simpleicons.org/github");
+  }
+
+  .social-name {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .social:hover .social-name { color: var(--green); }
+
+  .social-handle {
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: #555;
+    text-align: center;
+    text-transform: lowercase;
+    word-break: break-all;
+  }
+
+  .social-num {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 8px;
+    color: #2a2a2a;
+    letter-spacing: 1px;
+    pointer-events: none;
+  }
+
+  .social:hover .social-num { color: var(--green); }
+
+  /* ============ MODAL ============ */
+
   .modal-overlay {
     position: fixed;
     inset: 0;
@@ -419,7 +866,7 @@
     flex-direction: column;
     gap: 16px;
   }
-  
+
   .ver {
     border: 1px solid #2a2a2a;
     padding: 16px 18px;
@@ -501,6 +948,10 @@
     letter-spacing: 1px;
   }
 
+  /* ============ PHOTO ============ */
+
+  /* ============ PHOTO ============ */
+
   .photo {
     position: fixed;
     bottom: 60px;
@@ -509,19 +960,34 @@
     padding: 12px 12px 33px;
     background: #e8e8e8;
     border: 1px solid #000;
-    transform: rotate(-4deg);
+    /* тащим через CSS-переменные, чтобы hover-поворот не ломался */
+    transform: translate(var(--tx, 0px), var(--ty, 0px)) rotate(-4deg);
     z-index: 10;
     box-shadow: 6px 6px 0 rgba(57, 255, 20, 0.15);
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none; /* важно для мобилок */
   }
 
-  .photo:hover { transform: rotate(3deg) scale(1.05); }
+  .photo:hover {
+    transform: translate(var(--tx, 0px), var(--ty, 0px)) rotate(3deg) scale(1.05);
+  }
+
+  .photo.dragging {
+    cursor: grabbing;
+    box-shadow: 10px 10px 0 rgba(57, 255, 20, 0.35);
+    z-index: 100;
+  }
 
   .photo img {
     width: 100%;
     display: block;
     filter: grayscale(0.2) contrast(1.1);
+    pointer-events: none;      /* клик всегда по .photo, а не по картинке */
+    -webkit-user-drag: none;   /* никакого нативного drag'n'drop картинки */
+    user-select: none;
   }
-
   .photo::after {
     content: "me :)";
     position: absolute;
@@ -544,20 +1010,65 @@
     background: rgba(57, 255, 20, 0.35);
     border: 1px solid rgba(57, 255, 20, 0.6);
   }
+    .techstack {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #2a2a2a;
+  }
+
+  .techstack img {
+    height: 40px;
+    width: auto;
+    image-rendering: pixelated; /* чтобы иконки не мылились */
+    filter: brightness(0.9) contrast(1.1); /* чуть подгоняем под твой тёмный фон */
+  }
+  /* ============ MEDIA ============ */
 
   @media (max-width: 900px) {
     .game { grid-template-columns: 1fr; }
     .game-thumb { border-right: none; border-bottom: 1px solid #2a2a2a; max-height: 340px; }
   }
 
+  @media (hover: none) {
+    .shot-nav, .shot-counter { opacity: 1; pointer-events: auto; }
+  }
+
   @media (max-width: 700px) {
     body { padding: 20px; }
     .wrap { width: 100%; }
-    .logo-text { font-size: 27px; letter-spacing: 0; white-space: normal; }
-    .banner { height: 390px; }
+
+    .banner { height: 240px; }
+    .logo-text { font-size: 26px; letter-spacing: 0; white-space: normal; }
+    .desc { margin-top: 40px; }
     .desc p { font-size: 11px; }
+
+    .game { margin-top: 40px; }
     .game-title { font-size: 16px; }
     .game-desc { font-size: 10px; }
+
+    .music { margin-top: 40px; }
+    .track { grid-template-columns: 48px 1fr; gap: 14px; padding: 18px; }
+    .track-play { width: 44px; height: 44px; }
+    .ico-play { border-left-width: 12px; border-top-width: 8px; border-bottom-width: 8px; }
+    .ico-pause { width: 12px; height: 16px;
+      background: linear-gradient(to right, var(--green) 0 5px, transparent 5px 7px, var(--green) 7px 12px); }
+    .track-tags { grid-column: 1 / -1; justify-content: flex-start; max-width: none; margin-top: 4px; }
+    .track-name { font-size: 11px; }
+
+    .devlogs { margin-top: 40px; }
+    .log { padding: 18px; }
+    .log-title { font-size: 11px; }
+    .log-text { font-size: 10px; }
+
+    .socials { margin-top: 40px; grid-template-columns: repeat(2, 1fr); padding: 28px 16px 16px; gap: 10px; }
+    .social-ico { width: 36px; height: 36px; font-size: 18px; }
+    .social-name { font-size: 9px; }
+    .social-handle { font-size: 7px; }
+
     .photo { width: 165px; bottom: 30px; right: 30px; }
     .ver { grid-template-columns: 1fr; }
     .ver-dl { justify-content: center; }
@@ -634,7 +1145,148 @@
       </div>
     </div>
 
-  </div>
+    <div class="music">
+      <div class="track" data-track="1">
+        <button class="track-play" type="button" aria-label="play">
+          <span class="ico-play"></span>
+          <span class="ico-pause"></span>
+        </button>
+
+        <div class="track-body">
+          <div class="track-name">LAO LANDING <span class="hl">// v1</span></div>
+          <div class="track-meta">FL STUDIO · 2026 · 120 BPM · VKT112</div>
+
+          <div class="track-bar">
+            <div class="track-fill"></div>
+          </div>
+
+          <div class="track-time">
+            <span class="cur">0:00</span>
+            <span class="sep">/</span>
+            <span class="tot">0:00</span>
+          </div>
+        </div>
+
+        <div class="track-tags">
+          <span>atmospheric</span>
+          <span>mainmenu</span>
+        </div>
+
+        <audio src="track1.mp3" preload="metadata"></audio>
+      </div>
+
+      <div class="track" data-track="2">
+        <button class="track-play" type="button" aria-label="play">
+          <span class="ico-play"></span>
+          <span class="ico-pause"></span>
+        </button>
+
+        <div class="track-body">
+          <div class="track-name">LAO OUT <span class="hl">// v2</span></div>
+          <div class="track-meta">FL STUDIO · 2026 · 225 BPM · 1917</div>
+
+          <div class="track-bar">
+            <div class="track-fill"></div>
+          </div>
+
+          <div class="track-time">
+            <span class="cur">0:00</span>
+            <span class="sep">/</span>
+            <span class="tot">0:00</span>
+          </div>
+        </div>
+
+        <div class="track-tags">
+          <span>breakcore</span>
+          <span>maintheme</span>
+        </div>
+
+        <audio src="track2.mp3" preload="metadata"></audio>
+      </div>
+    </div>
+
+    <div class="devlogs">
+
+      <div class="log">
+        <div class="log-head">
+          <span class="log-date">2026.09.14</span>
+          <span class="log-tag">realese</span>
+        </div>
+        <div class="log-title">PROJECT <span class="hl">LAO</span> — релиз</div>
+        <div class="log-text">
+          <span class="hl">></span> релиз лао проект<br>
+          <span class="hl">></span> поиграйте пж<br>
+          <span class="hl">></span> сделал генерацию уровней </span>
+        </div>
+        
+      </div>
+
+      <div class="log">
+        <div class="log-head">
+          <span class="log-date">2026.09.25</span>
+          <span class="log-tag">14 mesto</span>
+        </div>
+        <div class="log-title">голосование завершено <span class="hl">//14</span> место </div>
+        <div class="log-text">
+          <span class="hl">></span> звук #2 место<br>
+          <span class="hl">></span> геймплей #11 место<br>
+          <span class="hl">></span> 14 место из 100 заявок
+        </div>
+      </div>
+
+      <div class="log">
+        <div class="log-head">
+          <span class="log-date">2026.09.29</span>
+          <span class="log-tag muted">ало</span>
+        </div>
+        <div class="log-title">23:05 <span class="hl">// я нихуя не делаю :P</span></div>
+        <div class="log-text">
+          <span class="hl">></span> я лежу<br>
+          <span class="hl">></span> слушаю C418<br>
+          <span class="hl">></span> Q-Q
+        </div>
+      </div>
+
+    </div>
+    
+        <div class="socials">
+
+      <a href="https://youtube.com/@matthexin" class="social" target="_blank" rel="noopener">
+        <span class="social-num">01</span>
+        <span class="social-ico" data-ico="youtube"></span>
+        <span class="social-name">youtube</span>
+        <span class="social-handle">@matthexin</span>
+      </a>
+
+      <a href="https://t.me/matthexin" class="social" target="_blank" rel="noopener">
+        <span class="social-num">02</span>
+        <span class="social-ico" data-ico="telegram"></span>
+        <span class="social-name">telegram</span>
+        <span class="social-handle">@matthexin</span>
+      </a>
+
+      <a href="https://discord.gg/Tv8KwQR9u" class="social" target="_blank" rel="noopener">
+        <span class="social-num">03</span>
+        <span class="social-ico" data-ico="discord"></span>
+        <span class="social-name">discord</span>
+        <span class="social-handle">/matthexin</span>
+      </a>
+
+      <a href="https://matthexin.itch.io" class="social" target="_blank" rel="noopener">
+        <span class="social-num">04</span>
+        <span class="social-ico" data-ico="itchio"></span>
+        <span class="social-name">itch.io</span>
+        <span class="social-handle">matthexin.itch.io</span>
+      </a>
+
+      <a href="https://github.com/matthexin" class="social" target="_blank" rel="noopener">
+        <span class="social-num">05</span>
+        <span class="social-ico" data-ico="github"></span>
+        <span class="social-name">github</span>
+        <span class="social-handle">@matthexin</span>
+      </a>
+
+    </div>
 
   <div class="photo">
     <img src="photo.jpg" alt="me">
@@ -674,6 +1326,63 @@
   </div>
 
 <script>
+  // MUSIC PLAYER
+  const allTracks = document.querySelectorAll('.track');
+
+  function fmtTime(s) {
+    if (!isFinite(s) || s < 0) return '0:00';
+    const m = Math.floor(s / 60);
+    const ss = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + ss;
+  }
+
+  allTracks.forEach(track => {
+    const audio = track.querySelector('audio');
+    const btn   = track.querySelector('.track-play');
+    const bar   = track.querySelector('.track-bar');
+    const fill  = track.querySelector('.track-fill');
+    const cur   = track.querySelector('.cur');
+    const tot   = track.querySelector('.tot');
+
+    btn.addEventListener('click', () => {
+      if (audio.paused) {
+        allTracks.forEach(t => {
+          const a = t.querySelector('audio');
+          if (a !== audio && !a.paused) a.pause();
+        });
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener('play',  () => track.classList.add('playing'));
+    audio.addEventListener('pause', () => track.classList.remove('playing'));
+
+    audio.addEventListener('loadedmetadata', () => {
+      tot.textContent = fmtTime(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      const p = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      fill.style.width = p + '%';
+      cur.textContent = fmtTime(audio.currentTime);
+    });
+
+    audio.addEventListener('ended', () => {
+      fill.style.width = '0%';
+      cur.textContent = '0:00';
+      track.classList.remove('playing');
+    });
+
+    bar.addEventListener('click', (e) => {
+      const rect = bar.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      if (audio.duration) audio.currentTime = p * audio.duration;
+    });
+  });
+
+  // LOGO GLITCH
   const el = document.getElementById('logoText');
   const target = 'MATTHEXIN WTF?';
   const chars = '!<>-_\\/[]{}—=+*^?#@$%&█▓▒░01';
@@ -697,6 +1406,7 @@
   }
   setInterval(scramble, 70);
 
+  // SCREENSHOT CAROUSEL
   const thumb = document.getElementById('thumb1');
   const shots = thumb.querySelectorAll('.shots img');
   const counter = thumb.querySelector('.shot-counter .cur');
@@ -716,6 +1426,7 @@
     });
   });
 
+  // MODAL
   const modal = document.getElementById('downloadModal');
   const openBtn = document.getElementById('openDownload');
   const closeBtn = document.getElementById('closeDownload');
@@ -728,7 +1439,42 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') modal.classList.remove('open');
   });
+  // DRAGGABLE POLAROID
+const photo = document.querySelector('.photo');
+
+let posX = 0, posY = 0;
+let dragging = false;
+let startX = 0, startY = 0;
+
+photo.addEventListener('pointerdown', (e) => {
+  if (e.button !== 0 && e.pointerType === 'mouse') return; // только ЛКМ
+  dragging = true;
+  photo.classList.add('dragging');
+  photo.setPointerCapture(e.pointerId);
+
+  startX = e.clientX - posX;
+  startY = e.clientY - posY;
+  e.preventDefault();
+});
+
+photo.addEventListener('pointermove', (e) => {
+  if (!dragging) return;
+  posX = e.clientX - startX;
+  posY = e.clientY - startY;
+  photo.style.setProperty('--tx', posX + 'px');
+  photo.style.setProperty('--ty', posY + 'px');
+});
+
+function endDrag() {
+  if (!dragging) return;
+  dragging = false;
+  photo.classList.remove('dragging');
+}
+
+photo.addEventListener('pointerup', endDrag);
+photo.addEventListener('pointercancel', endDrag);
+photo.addEventListener('lostpointercapture', endDrag);
 </script>
 
 </body>
-
+</html>
